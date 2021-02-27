@@ -1,0 +1,25 @@
+version: '3.7'
+services:
+  gateway:
+    deploy:
+      replicas: 2
+      restart_policy:
+        condition: on-failure
+    image: nginx:latest
+    ports:
+      - "80:80"
+#      - target: 80
+        #        published: 80
+        #        protocol: tcp
+        #        mode: host
+
+        #    network_mode: host
+
+    networks:
+      - frontend
+
+networks:
+  frontend:
+    driver: overlay
+    external: true
+
